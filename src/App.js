@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import HeartBlast from "./components/HeartBlast";
 
@@ -10,24 +11,23 @@ import Hindi from "./pages/Hindi";
 import MyHeart from "./pages/MyHeart";
 import QuestionAnswer from "./pages/QuestionAnswer";
 
-// App content
 function AppContent() {
-  const [blastVisible, setBlastVisible] = useState(false);
-  const [navigateTo, setNavigateTo] = useState("/");
+  const [showBlast, setShowBlast] = useState(false);
+  const [targetPath, setTargetPath] = useState("/");
   const navigate = useNavigate();
 
   const handleNavClick = (path) => {
-    setBlastVisible(true);
-    setNavigateTo(path);
+    setShowBlast(true);
+    setTargetPath(path);
     setTimeout(() => {
-      setBlastVisible(false);
+      setShowBlast(false);
       navigate(path);
     }, 1200); // HeartBlast duration
   };
 
   return (
-    <>
-      {blastVisible && <HeartBlast />}
+    <div className="app-wrapper">
+      {showBlast && <HeartBlast />}
       <Navbar onNavigate={handleNavClick} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -37,15 +37,14 @@ function AppContent() {
         <Route path="/myheart" element={<MyHeart />} />
         <Route path="/questionanswer" element={<QuestionAnswer />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
-// Wrap AppContent with Router
 export default function App() {
   return (
     <Router>
       <AppContent />
     </Router>
   );
-    }
+  }
