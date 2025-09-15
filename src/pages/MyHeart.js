@@ -4,31 +4,36 @@ export default function MyHeart() {
   const [words, setWords] = useState([]);
 
   useEffect(() => {
-    let temp = [];
+    const newWords = [];
     for (let i = 0; i < 100; i++) {
-      temp.push({
+      newWords.push({
         id: i,
-        left: Math.random() * 100 + "vw",
-        delay: Math.random() * 5 + "s",
+        left: Math.random() * 90 + "vw",
+        delay: Math.random() * 10 + "s",
+        size: Math.random() * 1.2 + 0.8 + "rem",
       });
     }
-    setWords(temp);
+    setWords(newWords);
   }, []);
 
   return (
-    <div className="page" style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-      {words.map((w) => (
-        <span
-          key={w.id}
-          className="floating-word"
-          style={{ left: w.left, animationDelay: w.delay }}
-        >
-          Shiropa
-        </span>
-      ))}
-      <h2 style={{ marginTop: "60vh", fontSize: "1.5rem" }}>
-        In my heart beats there is only one name - Shiropa
-      </h2>
-    </div>
+    <section className="page">
+      <h1>My Heart 💖</h1>
+      <div className="shiropa-container">
+        {words.map((w) => (
+          <span
+            key={w.id}
+            className="shiropa-word"
+            style={{
+              left: w.left,
+              animationDelay: w.delay,
+              fontSize: w.size,
+            }}
+          >
+            Shiropa
+          </span>
+        ))}
+      </div>
+    </section>
   );
-}
+    }
