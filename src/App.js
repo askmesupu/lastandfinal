@@ -1,46 +1,50 @@
-// src/App.js
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import HeartBlast from "./components/HeartBlast";
+
 import Home from "./pages/Home";
 import English from "./pages/English";
 import Bangla from "./pages/Bangla";
 import Hindi from "./pages/Hindi";
 import MyHeart from "./pages/MyHeart";
 import QuestionAnswer from "./pages/QuestionAnswer";
-import HeartBlast from "./components/HeartBlast";
-import "./index.css";
 
-function AnimatedRoute({ element: Element }) {
+export default function App() {
+  const [blastVisible, setBlastVisible] = useState(false);
+  const [navigateTo, setNavigateTo] = useState("/");
   const navigate = useNavigate();
-  const [showBlast, setShowBlast] = useState(false);
 
-  const handleClick = (path) => {
-    setShowBlast(true);
+  const handleNavClick = (path) => {
+    setBlastVisible(true);
+    setNavigateTo(path);
     setTimeout(() => {
-      setShowBlast(false);
+      setBlastVisible(false);
       navigate(path);
-    }, 1200); // heart animation duration
+    }, 1200); // HeartBlast duration
   };
 
   return (
     <>
-      {showBlast && <HeartBlast />}
-      <Element navigateWithBlast={handleClick} />
+      {blastVisible && <HeartBlast />}
+      <Navbar onNavigate={handleNavClick} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/english" element={<English />} />
+        <Route path="/bangla" element={<Bangla />} />
+        <Route path="/hindi" element={<Hindi />} />
+        <Route path="/myheart" element={<MyHeart />} />
+        <Route path="/questionanswer" element={<QuestionAnswer />} />
+      </Routes>
     </>
   );
 }
 
-export default function App() {
+// Wrap App with Router
+export function AppWrapper() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<AnimatedRoute element={Home} />} />
-        <Route path="/english" element={<AnimatedRoute element={English} />} />
-        <Route path="/bangla" element={<AnimatedRoute element={Bangla} />} />
-        <Route path="/hindi" element={<AnimatedRoute element={Hindi} />} />
-        <Route path="/myheart" element={<AnimatedRoute element={MyHeart} />} />
-        <Route path="/questionanswer" element={<AnimatedRoute element={QuestionAnswer} />} />
-      </Routes>
+      <App />
     </Router>
   );
-       }
+}
