@@ -1,144 +1,95 @@
+/* Global Styles */
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(120deg, #ffdde1, #ee9ca7);
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  text-align: center;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(6px);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.navbar button {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 25px;
-  font-weight: bold;
-  background: linear-gradient(90deg, #ff758c, #ff7eb3);
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.navbar button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 100, 150, 0.6);
-}
-
-/* Pages */
+/* Gradient background for all pages */
 .page {
-  padding: 30px;
-  text-align: center;
-  color: #fff;
-}
-
-.page h1 {
-  font-size: 2.2rem;
-  margin-bottom: 15px;
-  color: #ffebf0;
-}
-
-.page p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #fff;
-}
-
-/* Heart Blast Animation */
-.heart-blast {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 0, 100, 0.7);
-  animation: blast 1s ease forwards;
-  z-index: 2000;
+  background: linear-gradient(270deg, #ff6ec4, #7873f5, #00f2fe, #f77062);
+  background-size: 800% 800%;
+  animation: gradientShift 20s ease infinite;
 }
 
-.heart-blast span {
-  font-size: 8rem;
-  color: #fff;
-  animation: pulse 1s infinite;
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-@keyframes blast {
-  0% {
-    opacity: 1;
-    transform: scale(0.2);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.5);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(3);
-  }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
-/* Floating Shiropa */
-.floating-word {
-  position: absolute;
-  font-size: 20px;
-  color: #fff;
-  animation: float 10s linear infinite;
-  opacity: 0.7;
-}
-
-@keyframes float {
-  from { transform: translateY(100vh) rotate(0deg); }
-  to { transform: translateY(-10vh) rotate(360deg); }
-}
-
-/* Question Page */
-.q-buttons {
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-}
-
-.q-buttons button {
-  padding: 12px 25px;
-  font-size: 1.2rem;
-  border-radius: 30px;
+/* Buttons */
+button {
+  padding: 12px 22px;
   border: none;
-  background: linear-gradient(90deg, #ff758c, #ff7eb3);
-  color: white;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  margin: 12px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.2s ease, background 0.3s ease;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
-.q-buttons button:hover {
+button:hover {
   transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.35);
 }
 
-/* Popup */
-.popup {
-  margin-top: 20px;
+/* Responsive Fix */
+.navbar button {
+  font-size: 1rem;
+  padding: 10px 18px;
+  margin: 8px;
 }
 
-.popup img {
-  max-width: 200px;
-  margin-top: 10px;
-  border-radius: 15px;
-  }
+/* Circle Image Frame */
+.circle-frame {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid white;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  margin: 15px;
+}
+
+.circle-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Shiropa Floating Animation */
+.shiropa-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.shiropa-word {
+  position: absolute;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+  opacity: 0;
+  animation: floatWord 8s linear infinite;
+}
+
+@keyframes floatWord {
+  0% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 0; }
+  20% { opacity: 1; }
+  50% { transform: translateY(50vh) scale(1.2) rotate(180deg); }
+  80% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(0.7) rotate(360deg); opacity: 0; }
+                            }
