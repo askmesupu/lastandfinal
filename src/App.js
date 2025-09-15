@@ -10,7 +10,8 @@ import Hindi from "./pages/Hindi";
 import MyHeart from "./pages/MyHeart";
 import QuestionAnswer from "./pages/QuestionAnswer";
 
-export default function App() {
+// App content
+function AppContent() {
   const [blastVisible, setBlastVisible] = useState(false);
   const [navigateTo, setNavigateTo] = useState("/");
   const navigate = useNavigate();
@@ -40,11 +41,11 @@ export default function App() {
   );
 }
 
-// Wrap App with Router
-export function AppWrapper() {
+// Wrap AppContent with Router
+export default function App() {
   return (
     <Router>
-      <App />
+      <AppContent />
     </Router>
   );
-}
+    }
