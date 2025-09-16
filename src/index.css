@@ -10,7 +10,6 @@ body {
   color:white; 
 }
 
-/* Gradient animation keyframes */
 @keyframes gradientBG {
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
@@ -58,28 +57,63 @@ body {
   border:4px solid white; 
 }
 
-/* HeartBlast full-screen animation */
+/* ✅ HeartBlast Proper Heart Shape */
 .heart-blast-container { 
   position:fixed; 
   top:0; left:0; 
   width:100%; height:100%; 
-  background: rgba(255,0,128,0.2); 
   display:flex; 
   justify-content:center; 
   align-items:center; 
   z-index:9999; 
   pointer-events:none; 
+  background: rgba(255,0,128,0.2); 
 }
-.heart-blast { 
-  width:200px; 
-  height:200px; 
-  background: radial-gradient(circle, red, pink, yellow); 
-  clip-path: polygon(50% 0%, 61% 17%, 98% 35%, 68% 57%, 79% 91%, 50% 75%, 21% 91%, 32% 57%, 2% 35%, 39% 17%); 
-  animation: pulse 1.2s ease-out forwards; 
+
+.heart-blast {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 30% 30%, #ff477e, #ff99ac, #ffd1dc);
+  transform: rotate(-45deg) scale(0);
+  animation: blast 1.5s ease-out forwards;
+  border-radius: 0 0 0 0;
 }
-@keyframes pulse {
-  0% { transform: scale(0); opacity:1; }
-  100% { transform: scale(1.5); opacity:0; }
+
+/* top circles */
+.heart-blast::before,
+.heart-blast::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 30% 30%, #ff477e, #ff99ac, #ffd1dc);
+  border-radius: 50%;
+}
+
+.heart-blast::before {
+  top: -60px;
+  left: 0;
+}
+.heart-blast::after {
+  left: 60px;
+  top: 0;
+}
+
+/* Heart blast animation */
+@keyframes blast {
+  0% {
+    transform: rotate(-45deg) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(-45deg) scale(1.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(-45deg) scale(2.2);
+    opacity: 0;
+  }
 }
 
 /* Floating Words Styling for MyHeart */
@@ -102,18 +136,9 @@ body {
 }
 
 @keyframes floatWord {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translateY(-150px) translateX(50px) scale(1.2);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-300px) translateX(-50px) scale(0.9);
-    opacity: 0.1;
-  }
+  0% { transform: translateY(0) scale(1); opacity: 0.3; }
+  50% { transform: translateY(-150px) translateX(50px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(-300px) translateX(-50px) scale(0.9); opacity: 0.1; }
 }
 
 /* Glowing Text at Bottom for MyHeart */
@@ -128,30 +153,15 @@ body {
 }
 
 @keyframes glow {
-  from {
-    text-shadow: 0 0 10px #ff477e, 0 0 20px #ff6b9f, 0 0 30px #ff99ac;
-  }
-  to {
-    text-shadow: 0 0 20px #ff99ac, 0 0 40px #ff6b9f, 0 0 60px #ff477e;
-  }
+  from { text-shadow: 0 0 10px #ff477e, 0 0 20px #ff6b9f, 0 0 30px #ff99ac; }
+  to { text-shadow: 0 0 20px #ff99ac, 0 0 40px #ff6b9f, 0 0 60px #ff477e; }
 }
 
 /* AnswerQuestion Styling */
-.answer-container {
-  text-align: center;
-  margin-top: 3rem;
-}
+.answer-container { text-align: center; margin-top: 3rem; }
+.question-text { font-size: 1.6rem; margin-bottom: 1.5rem; }
 
-.question-text {
-  font-size: 1.6rem;
-  margin-bottom: 1.5rem;
-}
-
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
+.button-group { display: flex; justify-content: center; gap: 1.5rem; }
 
 .yes-btn, .no-btn {
   padding: 0.8rem 1.6rem;
@@ -162,7 +172,6 @@ body {
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.3s;
 }
-
 .yes-btn {
   background: linear-gradient(135deg, #ff477e, #ff99ac);
   color: white;
@@ -171,7 +180,6 @@ body {
   background: linear-gradient(135deg, #6a11cb, #2575fc);
   color: white;
 }
-
 .yes-btn:hover, .no-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 0 15px rgba(255,255,255,0.6);
@@ -188,7 +196,6 @@ body {
   align-items: center;
   z-index: 1000;
 }
-
 .popup-box {
   background: rgba(255,255,255,0.15);
   backdrop-filter: blur(12px);
@@ -199,31 +206,21 @@ body {
   box-shadow: 0 0 30px rgba(255,255,255,0.3);
   position: relative;
 }
-
 .popup-img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 15px;
-  border: 4px solid white;
+  width: 150px; height: 150px;
+  border-radius: 50%; object-fit: cover;
+  margin-bottom: 15px; border: 4px solid white;
 }
-
 .popup-text {
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-size: 1.3rem; font-weight: bold;
   color: white;
   text-shadow: 0 0 8px #ff99ac, 0 0 15px #ff477e;
 }
-
 .close-btn {
   position: absolute;
   top: 10px; right: 10px;
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  cursor: pointer;
+  background: transparent; border: none;
+  color: white; font-size: 1.2rem; cursor: pointer;
 }
 
 /* Responsive fixes */
@@ -231,4 +228,4 @@ body {
   .navbar button{padding:0.5rem 0.8rem; font-size:0.9rem;}
   .circle-pic{width:100px; height:100px;}
   .popup-box{width: 90%;}
-  }
+    }
